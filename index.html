@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biodata App</title>
+  
+  <!-- HUBUNGKAN KE FILE CSS -->
+  <<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app">
+    <div class="container glass">
+
+      <div class="app-header">
+        <h2>📋 BIODATA SISWA</h2>
+      </div>
+
+      <div class="fields">
+
+        <!-- NAMA -->
+        <div class="field">
+          <input id="nama" placeholder="Nama Lengkap">
+          <span class="err-msg" id="err-nama">Nama hanya boleh huruf dan spasi</span>
+        </div>
+
+        <!-- NIS -->
+        <div class="field">
+          <div class="input-wrap">
+            <input id="nis" placeholder="NIS" type="tel" inputmode="numeric" maxlength="10" style="padding-right:44px;">
+            <span class="counter" id="nisCount">0/10</span>
+          </div>
+          <span class="err-msg" id="err-nis">NIS harus berupa angka (maks. 10 digit)</span>
+        </div>
+
+        <!-- ALAMAT -->
+        <div class="field">
+          <input id="alamat" placeholder="Alamat">
+          <span class="err-msg" id="err-alamat">Alamat hanya boleh huruf dan spasi</span>
+        </div>
+
+        <!-- TELEPON -->
+        <div class="field">
+          <div class="input-wrap tel-wrap" style="display:flex;align-items:stretch;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);">
+            <span id="tel-prefix" style="
+              padding:0 10px 0 12px;
+              background:rgba(255,255,255,0.07);
+              border-right:1px solid rgba(255,255,255,0.07);
+              font-size:14px;font-weight:600;
+              color:rgba(255,255,255,0.5);
+              white-space:nowrap;flex-shrink:0;
+              display:flex;align-items:center;
+            ">+62</span>
+            <input id="telepon" placeholder="8xxxxxxxxxx" type="tel" inputmode="numeric" maxlength="13"
+              style="margin-top:0;border-radius:0;border:none;padding-right:44px;flex:1;">
+            <span class="counter" id="telCount" style="right:12px;">0/13</span>
+          </div>
+          <span class="err-msg" id="err-telepon">Nomor harus diawali 8, minimal 9 digit setelah +62</span>
+        </div>
+
+        <!-- UMUR -->
+        <div class="field">
+          <input id="umur" type="tel" inputmode="numeric" placeholder="Umur" maxlength="3">
+          <span class="err-msg" id="err-umur">Umur harus berupa angka (1–150)</span>
+        </div>
+
+        <!-- TTL -->
+        <div class="field">
+          <div class="ttl-label">Tanggal Lahir</div>
+          <div class="ttl-row">
+            <input id="ttlTgl" type="tel" inputmode="numeric" maxlength="2" placeholder="Tgl">
+            <input id="ttlBln" type="tel" inputmode="numeric" maxlength="2" placeholder="Bln">
+            <input id="ttlThn" type="tel" inputmode="numeric" maxlength="4" placeholder="Tahun">
+          </div>
+          <span class="err-msg" id="err-ttl">Tanggal lahir tidak valid (Tgl 1–31, Bln 1–12, Tahun 4 digit)</span>
+        </div>
+
+        <!-- GENDER -->
+        <div class="field">
+          <div class="ttl-label">Jenis Kelamin</div>
+          <div class="gender-wrap">
+            <div class="gender-btn" id="btnLaki" onclick="pilihGender('Laki-laki')">♂ Laki-laki</div>
+            <div class="gender-btn" id="btnPerempuan" onclick="pilihGender('Perempuan')">♀ Perempuan</div>
+          </div>
+          <span class="err-msg" id="err-gender">Pilih jenis kelamin terlebih dahulu</span>
+        </div>
+
+      </div>
+
+      <div class="btn-group">
+        <button id="btnTambah" class="add">Tambah</button>
+        <button id="btnUpdate" class="update disabled">Update</button>
+      </div>
+
+      <div id="list"></div>
+    </div>
+  </div>
+
+  <!-- MODAL DETAIL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div id="avatarEl" class="avatar"></div>
+      <h3 id="namaDetail"></h3>
+      <div id="badgeGender"></div>
+      <div id="detailBox" class="detail-box"></div>
+      <button class="close-btn" onclick="tutupModal()">Tutup</button>
+    </div>
+  </div>
+
+  <!-- CONFIRM HAPUS -->
+  <div id="confirmOverlay" class="confirm-overlay">
+    <div class="confirm-box">
+      <div class="icon">🗑️</div>
+      <h3>Hapus Data?</h3>
+      <p id="confirmDesc">Data ini akan dihapus permanen.</p>
+      <div class="confirm-actions">
+        <button class="btn-cancel" onclick="tutupConfirm()">Batal</button>
+        <button class="btn-hapus" onclick="konfirmasiHapus()">Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SNACKBAR -->
+  <div id="snackbar">
+    <span class="sb-dot" id="sbDot"></span>
+    <span id="sbMsg"></span>
+    <button class="sb-undo" id="sbUndo" style="display:none;" onclick="undoHapus()">Undo</button>
+  </div>
+
+  <div id="toast"></div>
+
+  <!-- HUBUNGKAN KE FILE JAVASCRIPT -->
+  <script src="java/script.js"></script>
+</body>
+</html>
